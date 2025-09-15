@@ -1,9 +1,11 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { fileURLToPath } from 'node:url';
+import { dirname, resolve } from 'node:path';
 
 export default defineConfig({
-  root: 'frontend',
-  publicDir: 'frontend/public',
+  root: resolve(dirname(fileURLToPath(import.meta.url)), 'frontend'),
+  publicDir: resolve(dirname(fileURLToPath(import.meta.url)), 'frontend', 'public'),
   plugins: [
     react({
       include: [/\.jsx?$/, /\.tsx?$/]
@@ -27,7 +29,7 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: 'dist',
+    outDir: resolve(dirname(fileURLToPath(import.meta.url)), 'frontend', 'dist'),
     emptyOutDir: true,
   },
 });
